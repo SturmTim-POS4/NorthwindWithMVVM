@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "be2381ca-440b-43e4-a256-69d955826a93": {
+      "ProjectGuid": "be2381ca-440b-43e4-a256-69d955826a93",
+      "DisplayName": "NorthwindWithMVVM",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

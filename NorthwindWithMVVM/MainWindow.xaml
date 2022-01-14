@@ -1,0 +1,32 @@
+﻿<Window x:Class="NorthwindWithMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NorthwindWithMVVM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="Min.Date" Margin="35,30,700,370"></Label>
+        <DatePicker Margin="100,30,530,370"></DatePicker>
+
+        <ListBox Margin="35,150,530,90"></ListBox>
+
+        <Label Content="1991-01-01" Margin="400,110,280,300"></Label>
+        
+        <ListBox Margin="400,150,30,200"></ListBox>
+        
+        <ComboBox Margin="400,260,140,150"></ComboBox>
+        <Button Content="Add" Margin="670,260,30,150"></Button>
+        
+        <Label Content="Quantity:" Margin="400,320,320,100"></Label>
+        <TextBox Margin="470,320,250,100"></TextBox>
+        <Button Content="-" Margin="560,320,210,100"></Button>
+        <Button Content="+" Margin="600,320,170,100"></Button>
+
+        <Label Margin="530,30,180,380" Content="Productname:"/>
+        <TextBox Margin="630,30,60,380"></TextBox>
+        <Label Content="Supplier:" Margin="530,75,180,335"></Label>
+        <TextBox Margin="630,75,60,335"></TextBox>
+    </Grid>
+</Window>
