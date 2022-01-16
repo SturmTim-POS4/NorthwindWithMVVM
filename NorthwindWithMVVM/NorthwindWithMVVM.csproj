@@ -7,4 +7,10 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MvvmTools\MvvmTools.csproj" />
+      <ProjectReference Include="..\NorthwindDB\NorthwindDB.csproj" />
+      <ProjectReference Include="..\ViewModelLibrary\ViewModelLibrary.csproj" />
+    </ItemGroup>
+
 </Project>

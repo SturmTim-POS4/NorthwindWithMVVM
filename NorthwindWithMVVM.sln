@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTools", "MvvmTools\Mvvm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindDB", "NorthwindDB\NorthwindDB.csproj", "{00711722-3364-4B46-BA4B-012EFF9E32A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelLibrary", "ViewModelLibrary\ViewModelLibrary.csproj", "{4781FEC8-4A5D-4108-8217-FA3474532879}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{00711722-3364-4B46-BA4B-012EFF9E32A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00711722-3364-4B46-BA4B-012EFF9E32A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00711722-3364-4B46-BA4B-012EFF9E32A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4781FEC8-4A5D-4108-8217-FA3474532879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4781FEC8-4A5D-4108-8217-FA3474532879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4781FEC8-4A5D-4108-8217-FA3474532879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4781FEC8-4A5D-4108-8217-FA3474532879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

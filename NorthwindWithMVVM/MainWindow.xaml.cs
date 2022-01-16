@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NorthwindDB;
+using ViewModelLibrary;
 
 namespace NorthwindWithMVVM
 {
@@ -22,7 +24,8 @@ namespace NorthwindWithMVVM
     {
         public MainWindow()
         {
-            InitializeComponent();
+            var db = new NorthwindContext();
+            DataContext = new NorthwindViewModel().Init(db);
         }
     }
 }

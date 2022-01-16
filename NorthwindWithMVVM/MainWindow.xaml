@@ -3,20 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:ViewModelLibrary;assembly=ViewModelLibrary" d:DataContext="{d:DesignInstance viewModel:NorthwindViewModel}"
         xmlns:local="clr-namespace:NorthwindWithMVVM"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Label Content="Min.Date" Margin="35,30,700,370"></Label>
-        <DatePicker Margin="100,30,530,370"></DatePicker>
+        <DatePicker Text="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="100,30,530,370"></DatePicker>
 
-        <ListBox Margin="35,150,530,90"></ListBox>
+        <ListBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder, UpdateSourceTrigger=PropertyChanged}" Margin="35,150,530,90" ></ListBox>
 
-        <Label Content="1991-01-01" Margin="400,110,280,300"></Label>
+        <Label Content="{Binding Date}" Margin="400,110,280,300"></Label>
         
-        <ListBox Margin="400,150,30,200"></ListBox>
+        <ListBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding OrderDetails}" SelectedItem="{Binding SelectedOrderDetail, UpdateSourceTrigger=PropertyChanged}" Margin="400,150,30,200"></ListBox>
         
-        <ComboBox Margin="400,260,140,150"></ComboBox>
+        <ComboBox ItemsSource="{Binding Products}" Margin="400,260,140,150"></ComboBox>
         <Button Content="Add" Margin="670,260,30,150"></Button>
         
         <Label Content="Quantity:" Margin="400,320,320,100"></Label>
@@ -25,8 +26,8 @@
         <Button Content="+" Margin="600,320,170,100"></Button>
 
         <Label Margin="530,30,180,380" Content="Productname:"/>
-        <TextBox Margin="630,30,60,380"></TextBox>
+        <TextBox Text="{Binding ProductName}" Margin="630,30,60,380"></TextBox>
         <Label Content="Supplier:" Margin="530,75,180,335"></Label>
-        <TextBox Margin="630,75,60,335"></TextBox>
+        <TextBox Text="{Binding Supplier}" Margin="630,75,60,335"></TextBox>
     </Grid>
 </Window>
