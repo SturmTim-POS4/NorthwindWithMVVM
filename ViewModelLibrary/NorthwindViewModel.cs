@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using NorthwindDB;
 using MvvmTools;
@@ -11,9 +12,9 @@ public class NorthwindViewModel : ObservableObject
 
     public ObservableCollection<Product> Products { get; private set; } = new();
 
-    private DateTime _selectedDateTime;
+    private DateTime? _selectedDateTime;
 
-    public DateTime SelectedDateTime
+    public DateTime? SelectedDateTime
     {
         get => _selectedDateTime;
         set
@@ -45,11 +46,12 @@ public class NorthwindViewModel : ObservableObject
         set
         {
             _selectedOrder = value;
-            OrderDetails = _db.OrderDetails
+            OrderDetails = OrderDetails = _db.OrderDetails
                 .Include(x => x.Product)
                 .Include(x => x.Product.Supplier)
-                .Where(x => x.Order == SelectedOrder).ToList();
-            Date = _selectedOrder.OrderDate.ToString();
+                .Where(x => x.Order == SelectedOrder)
+                .AsObservableCollection();
+            Date = DateOnly.FromDateTime((DateTime) _selectedOrder.OrderDate).ToString();
             NotifyPropertyChanged(nameof(SelectedOrder));
         }
     }
@@ -68,9 +70,9 @@ public class NorthwindViewModel : ObservableObject
         }
     }
 
-    private List<OrderDetail> _orderDetails;
+    private ObservableCollection<OrderDetail> _orderDetails;
 
-    public List<OrderDetail> OrderDetails
+    public ObservableCollection<OrderDetail> OrderDetails
     {
         get => _orderDetails;
         set
@@ -115,15 +117,60 @@ public class NorthwindViewModel : ObservableObject
             NotifyPropertyChanged(nameof(Date));
         }
     }
+
+    private int _quantity;
+
+    public int Quantity
+    {
+        get => _quantity;
+        set
+        {
+            _quantity = value;
+            NotifyPropertyChanged(nameof(Quantity));
+        }
+    }
     
-    public NorthwindViewModel () {}
+    private Product _selectedProduct;
+
+    public Product SelectedProduct
+    {
+        get => _selectedProduct;
+        set
+        {
+            _selectedProduct = value;
+            NotifyPropertyChanged(nameof(SelectedProduct));
+        }
+    }
 
     public NorthwindViewModel Init(NorthwindContext db)
     {
         _db = db;
         Products = _db.Products.Include(x => x.Category).AsObservableCollection();
+        _selectedProduct = Products.First();
+        _selectedDateTime = _db.Orders.OrderBy(x => x.OrderDate).Select(x => x.OrderDate).First();
         return this;
     }
 
-    
+    public ICommand AddQuantity => new RelayCommand<string>(_ => { Quantity++; });
+
+    public ICommand SubstractQuantity => new RelayCommand<string>(_ => { Quantity--; }, x => Quantity != 0);
+
+    public ICommand AddProduct => new RelayCommand<string>(AddOrderDetail);
+
+    private void AddOrderDetail(string obj)
+    {
+        var newOrderDetail = new OrderDetail()
+        {
+            Product = SelectedProduct,
+            ProductId = SelectedProduct.ProductId,
+            Quantity = (short) Quantity,
+            UnitPrice = (decimal) SelectedProduct.UnitPrice,
+            Order = SelectedOrder,
+            OrderId = SelectedOrder.OrderId
+        };
+        _db.OrderDetails.Add(newOrderDetail);
+        _db.Orders.First(x => x.Equals(SelectedOrder)).OrderDetails.Add(newOrderDetail);
+        _db.SaveChanges();
+        SelectedOrder = _selectedOrder;
+    }
 }

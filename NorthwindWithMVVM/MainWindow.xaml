@@ -8,26 +8,68 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Min.Date" Margin="35,30,700,370"></Label>
-        <DatePicker Text="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="100,30,530,370"></DatePicker>
-
-        <ListBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder, UpdateSourceTrigger=PropertyChanged}" Margin="35,150,530,90" ></ListBox>
-
-        <Label Content="{Binding Date}" Margin="400,110,280,300"></Label>
         
-        <ListBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding OrderDetails}" SelectedItem="{Binding SelectedOrderDetail, UpdateSourceTrigger=PropertyChanged}" Margin="400,150,30,200"></ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         
-        <ComboBox ItemsSource="{Binding Products}" Margin="400,260,140,150"></ComboBox>
-        <Button Content="Add" Margin="670,260,30,150"></Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         
-        <Label Content="Quantity:" Margin="400,320,320,100"></Label>
-        <TextBox Margin="470,320,250,100"></TextBox>
-        <Button Content="-" Margin="560,320,210,100"></Button>
-        <Button Content="+" Margin="600,320,170,100"></Button>
+        <StackPanel Orientation="Horizontal">
+            <Label VerticalAlignment="Center"  Content="Min.Date"></Label>
+            <DatePicker VerticalAlignment="Center" 
+                        Text="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+        </StackPanel>
+        
+        <ListBox Grid.Row="1" Grid.RowSpan="3" Margin="20" 
+                 IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder, UpdateSourceTrigger=PropertyChanged}" ></ListBox>
 
-        <Label Margin="530,30,180,380" Content="Productname:"/>
-        <TextBox Text="{Binding ProductName}" Margin="630,30,60,380"></TextBox>
-        <Label Content="Supplier:" Margin="530,75,180,335"></Label>
-        <TextBox Text="{Binding Supplier}" Margin="630,75,60,335"></TextBox>
+        <Label VerticalAlignment="Bottom" Grid.Column="1" 
+               Content="{Binding Date}"></Label>
+        
+        <ListBox Margin="20" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" 
+                 IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding OrderDetails}" SelectedItem="{Binding SelectedOrderDetail, UpdateSourceTrigger=PropertyChanged}"></ListBox>
+        
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Label Content="Quantity:"></Label>
+            <TextBox MinWidth="30"
+                     Text="{Binding Quantity}" ></TextBox>
+            <Button Margin="5,0" MinWidth="20"
+                    Command="{Binding SubstractQuantity, Mode=OneWay}" Content="-"></Button>
+            <Button Margin="5,0" MinWidth="20"
+                    Command="{Binding AddQuantity, Mode=OneWay}" Content="+"></Button>
+        </StackPanel>
+        
+        <ComboBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                  ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+
+        
+        <Button Margin="30" Grid.Column="2" Grid.Row="2" 
+                Command="{Binding AddProduct}" Content="Add"></Button>
+        
+        <Grid Grid.Column="2" Margin="5" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label  Content="Productname:"/>
+            <TextBox Grid.Column="1"
+                     Text="{Binding ProductName}" ></TextBox>
+            <Label Grid.Row="1"  Content="Supplier:" ></Label>
+            <TextBox Grid.Row="1" Grid.Column="1"
+                     Text="{Binding Supplier}"></TextBox>
+        </Grid>
     </Grid>
 </Window>

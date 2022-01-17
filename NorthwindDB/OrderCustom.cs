@@ -4,6 +4,6 @@ public partial class Order
 {
     public override string ToString()
     {
-        return $"Order {OrderId} from {OrderDate}";
+        return $"Order {OrderId} from {DateOnly.FromDateTime((DateTime) OrderDate)}";
     }
 }
